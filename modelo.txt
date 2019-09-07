@@ -1,0 +1,22 @@
+a,b // alfabeto (não usar '{}')
+inicial=q0 // aqui vai o estado inicial (não usar espaço (' ') entre o símbolo de '=' o o estado) 
+final=q2,q4 // aqui vão os estados finais (separar os estados com vírgula e sem espaço entre eles)
+
+// transições
+q0,a,q1 // as transições devem ser cadastradas nessa ordem (qa,x,qd) onde 'qa' é o estado atual, 'x' é o símbolo do alfabeto e 'qd' é o estado de destino 
+q0,b,q3
+
+q1,a,q3
+q1,b,q2
+
+q2,a,q2
+q2,b,q4
+
+q3,a,q3
+q3,b,q3
+
+q4,a,q4
+q4,b,q4
+
+// --  ATENÇÃO -- //
+// REMOVER TUDO QUE ESTEJA DEPOIS DE '//' e inclusive as '//'
