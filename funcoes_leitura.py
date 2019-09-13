@@ -1,5 +1,6 @@
 from estado import Estado
 from automato import Automato
+from funcoes_minimizacao import start
 
 #Método auxiliar para tirar as linhas em branco (\n) da leitura do arquivo txt
 def arrumaLinhas(linhas):
@@ -67,12 +68,17 @@ def lerPalavras(automato):
         palavra = input("Digite a palavra a ser testada no automato: ")
         
         if (palavra != "/sair"): automato.testar(palavra)
-        else: break
+        else: return
+
+    return
 
 #Inicia a leitura do arquivo de texto
 def init(arquivo):
     with open(arquivo) as arquivo:
         linhas, estados, alfabeto, inicial, finais = getInput(arquivo)
+
+        #variável usada para exportar os estados para a minimização
+        _estados = estados
 
         automato = Automato(alfabeto, inicial, finais)
 
@@ -81,3 +87,4 @@ def init(arquivo):
         #Se o automato tiver todos os estados cadastrados, então o usuário poderá ler as palavras para teste
         if (verificaAutomato(estados, alfabeto) == False):
             lerPalavras(automato)
+            start(estados, automato)
