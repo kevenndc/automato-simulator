@@ -4,6 +4,7 @@ dist_states = {}
 all_states = {}
 non_dist_states = {}
 
+#Faz a primeira distinção entre estados finais e não finais e armazena todas as combinações de estados em um dicionário
 def primeiraDinstincao(x, y, automato):
     for estado_x in x:
         for estado_y in y:
@@ -31,17 +32,17 @@ def buscaEquivalentes(automato):
         marcado = False
         for each in non_dist_states.keys():
             if (non_dist_states[(each[0], each[1])] == False):
-
                 for simbolo in automato.alfabeto:
 
                     if (((each[0].vizinhos[simbolo], each[1].vizinhos[simbolo]) in dist_states) or ((each[1].vizinhos[simbolo], each[0].vizinhos[simbolo]) in dist_states)):
                         dist_states[(each[0], each[1])] = True
                         non_dist_states[(each[0], each[1])] = True
                         marcado = True
-        
+                        
         if (marcado == False):
             break
 
+#Cria uma lista com todos os estados que não foram distinguíveis depois da função buscaEquivatentes()
 def getEstadosNaoDistinguiveis():
     nova_lista = {}
     for key, value in non_dist_states.items():
@@ -50,10 +51,10 @@ def getEstadosNaoDistinguiveis():
 
     return nova_lista
 
-def start(estados, automato):
+def getXY(estados):
     x = []
     y = []    
-    print(estados)
+
     for index, (key, value) in enumerate(estados.items()):
         if (index > 0):
             x.append(value)
@@ -61,6 +62,12 @@ def start(estados, automato):
     for index, (key, value) in enumerate(estados.items()):
         if (index < (estados.__len__() - 1)):
             y.append(value)
+
+    return x, y;
+
+def start(estados, automato):
+    
+    x, y = getXY(estados)
 
     primeiraDinstincao(x, y, automato);
 
