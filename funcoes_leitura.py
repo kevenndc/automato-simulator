@@ -77,14 +77,18 @@ def init(arquivo):
     with open(arquivo) as arquivo:
         linhas, estados, alfabeto, inicial, finais = getInput(arquivo)
 
-        #variável usada para exportar os estados para a minimização
-        _estados = estados
-
         automato = Automato(alfabeto, inicial, finais)
 
         aplicaTransicoes(linhas, estados)
         
         #Se o automato tiver todos os estados cadastrados, então o usuário poderá ler as palavras para teste
         if (verificaAutomato(estados, alfabeto) == False):
-            lerPalavras(automato)
-            start(estados, automato)
+            res = input("Selecione a opção dessejada digitando o número da respectiva opção:\n" + 
+                    "1: Para testar palavras no autômato\n" + 
+                    "2: Para mostrar estados equivalentes\n")
+
+            if res == "1":
+                lerPalavras(automato)
+            elif res == "2":
+                start(estados, automato)
+            
